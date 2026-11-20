@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Jawaab — the AI WhatsApp inbox that answers every customer</title>
-<meta name="description" content="Jawaab is an AI-powered WhatsApp inbox for D2C brands. It learns your business, replies in seconds in English, Hindi or Hinglish, labels every customer and flags the chats that need you." />
+<meta name="description" content="Jawaab is an AI-powered WhatsApp inbox for businesses that sell on WhatsApp. It learns your business, replies in seconds in English, Hindi or Hinglish, labels every customer and flags the chats that need you." />
 <meta property="og:title" content="Jawaab — every customer gets the right answer, in seconds" />
-<meta property="og:description" content="AI WhatsApp inbox for D2C brands: replies in your customer's language, labels leads, remembers customers and flags the chats that need you." />
+<meta property="og:description" content="AI WhatsApp inbox for brands and businesses: replies in your customer's language, labels leads, remembers customers and flags the chats that need you." />
 <meta property="og:type" content="website" />
 <meta name="theme-color" content="#0d4f43" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -93,7 +93,7 @@ p { margin: 0; }
 @media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 56px; } }
 .pill { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); box-shadow: var(--shadow); }
 .pill b { background: var(--saffron-soft); color: #8a5a00; border-radius: 999px; padding: 3px 10px; font-weight: 600; font-size: 12px; }
-.hero h1 { font-size: clamp(42px, 6.3vw, 78px); margin-top: 22px; font-weight: 800; }
+.hero h1 { font-size: clamp(40px, 5.2vw, 66px); margin-top: 22px; font-weight: 800; }
 .hero h1 .hl { position: relative; white-space: nowrap; color: var(--brand); }
 .hero h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .2em; background: var(--saffron); opacity: .38; border-radius: 4px; z-index: -1; }
 .hero .lede { margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 560px; }
@@ -188,6 +188,18 @@ p { margin: 0; }
 .bars { display: flex; align-items: flex-end; gap: 4px; height: 96px; }
 .bars i { flex: 1; background: var(--brand-3); border-radius: 4px 4px 0 0; opacity: .9; }
 
+/* use cases */
+.uses { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1020px) { .uses { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .uses { grid-template-columns: 1fr; } }
+.use { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; transition: border-color .2s, transform .2s; }
+.use:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.use .em { width: 44px; height: 44px; border-radius: 12px; background: var(--bg-2); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.use h3 { font-size: 18.5px; margin-top: 16px; }
+.use p { margin-top: 6px; font-size: 14.5px; color: var(--ink-2); }
+.use .q { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+.use .q span { align-self: flex-start; background: var(--bg); border: 1px solid var(--line); border-radius: 12px 12px 12px 3px; padding: 6px 10px; font-size: 13px; color: var(--ink); }
+
 /* how */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: s; }
 @media (max-width: 980px) { .steps { grid-template-columns: 1fr 1fr; } }
@@ -207,6 +219,7 @@ p { margin: 0; }
 .convo { background: var(--chat-bg); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-height: 300px; border: 1px solid var(--line); background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px); background-size: 14px 14px; }
 .convo .b { font-size: 14.5px; max-width: 88%; }
 .convo[hidden] { display: none; }
+.biz { align-self: center; font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); background: rgba(255,255,255,.75); border-radius: 999px; padding: 4px 12px; margin-bottom: 4px; }
 .why-card { margin-top: 4px; align-self: flex-end; font-size: 12.5px; color: var(--ink-2); background: rgba(255,255,255,.7); border: 1px dashed var(--line-2); border-radius: 10px; padding: 6px 10px; max-width: 88%; }
 .check-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
 .check-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; color: var(--ink-2); }
@@ -311,6 +324,7 @@ footer a:hover { color: var(--ink); }
     <nav class="nav-links" aria-label="Main">
       <a href="#features">Features</a>
       <a href="#ai">AI agent</a>
+      <a href="#use-cases">Use cases</a>
       <a href="#how">How it works</a>
       <a href="#dashboard">Insights</a>
       <a href="#faq">FAQ</a>
@@ -325,6 +339,7 @@ footer a:hover { color: var(--ink); }
   <div class="mobile-menu" id="mobileMenu">
     <a href="#features">Features</a>
     <a href="#ai">AI agent</a>
+    <a href="#use-cases">Use cases</a>
     <a href="#how">How it works</a>
     <a href="#dashboard">Insights</a>
     <a href="#faq">FAQ</a>
@@ -338,7 +353,7 @@ footer a:hover { color: var(--ink); }
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="pill"><b>Early access</b> Built for D2C brands selling on WhatsApp</span>
+      <span class="pill"><b>Early access</b> For brands &amp; businesses that sell on WhatsApp</span>
       <h1>Every customer gets the <span class="hl">right answer</span>, in seconds.</h1>
       <p class="lede">Jawaab is an AI-powered WhatsApp inbox. It learns your business, replies to every customer in their own language — English, Hindi or Hinglish — labels your leads, remembers each customer, and flags the chats that need you.</p>
       <div class="hero-ctas">
@@ -359,15 +374,15 @@ footer a:hover { color: var(--ink); }
       <div class="phone">
         <div class="screen">
           <div class="chat-top">
-            <div class="avatar">P</div>
-            <div><b>Priya Sharma</b><small>from your Instagram ad</small></div>
+            <div class="avatar">A</div>
+            <div><b>Aanya Mehta</b><small>from your Instagram ad</small></div>
           </div>
           <div class="chat-body">
             <span class="day">Today</span>
-            <div class="b in">Hi, saw your ad. Price kya hai? 🙂<span class="t">9:41 pm</span></div>
-            <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Namaste Priya ji 🙏 <b>Brain Booster</b> 200 ml sirf <b>₹500</b> hai, free delivery ke saath. Cash on Delivery bhi available hai 😊<span class="t">9:41 pm ✓✓</span></div>
-            <div class="b in">Mera beta 4 saal ka hai, bolta kam hai. Kitna dena hai?<span class="t">9:42 pm</span></div>
-            <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Samajh sakti hoon 🙏 4 saal ke liye <b>5 ml raat ko</b>. 5–7 din baad <b>subah aur raat</b> dono waqt dein. Kam se kam 1–2 mahine regular dijiye.<span class="t">9:42 pm ✓✓</span></div>
+            <div class="b in">Hi! Saw your ad 😍 Vitamin C serum ka price kya hai?<span class="t">9:41 pm</span></div>
+            <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Hi Aanya 😊 Hamara <b>Vitamin C Serum</b> (30 ml) <b>₹649</b> ka hai, free delivery ke saath. Cash on Delivery bhi available hai!<span class="t">9:41 pm ✓✓</span></div>
+            <div class="b in">Meri skin oily hai, suit karega?<span class="t">9:42 pm</span></div>
+            <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Haan bilkul 🙌 Ye <b>lightweight, non-greasy</b> formula hai — oily skin ke liye perfect. Subah sunscreen se pehle <b>2–3 drops</b> lagaiye.<span class="t">9:42 pm ✓✓</span></div>
             <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
           </div>
           <div class="chat-input">
@@ -379,34 +394,33 @@ footer a:hover { color: var(--ink); }
 
       <div class="float float-1" aria-hidden="true">
         <div class="k"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Labelled automatically</div>
-        <div class="chips"><span class="chip"><i class="dot" style="background:#53bdeb"></i>New lead</span><span class="chip"><i class="dot" style="background:#06b6d4"></i>Speech delay</span><span class="chip"><i class="dot" style="background:#ffbc38"></i>Ready to buy</span></div>
+        <div class="chips"><span class="chip"><i class="dot" style="background:#53bdeb"></i>New lead</span><span class="chip"><i class="dot" style="background:#06b6d4"></i>Oily skin</span><span class="chip"><i class="dot" style="background:#ffbc38"></i>Ready to buy</span></div>
       </div>
       <div class="float float-2" aria-hidden="true">
         <div class="k"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>Remembered</div>
         <dl class="memory" style="grid-template-columns:70px 1fr;padding:10px 12px;font-size:12.5px;background:#fff;border:0;margin:0">
-          <dt>Child</dt><dd>4 years</dd>
-          <dt>Concern</dt><dd>Speech delay</dd>
+          <dt>Skin</dt><dd>Oily</dd>
+          <dt>Wants</dt><dd>Vitamin C serum</dd>
           <dt>Language</dt><dd>Hinglish</dd>
         </dl>
       </div>
       <div class="float float-3" aria-hidden="true">
         <div class="k">Needs you · 2</div>
-        <div class="flag red">⚑ Side effect reported — urgent</div>
-        <div class="flag amber" style="margin-top:6px">⚑ Bulk order: 50 bottles</div>
+        <div class="flag red">⚑ Damaged parcel — urgent</div>
+        <div class="flag amber" style="margin-top:6px">⚑ Bulk order: 200 units</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ───────── stats ───────── -->
-<section class="strip" aria-label="Results">
+<!-- ───────── strip ───────── -->
+<section class="strip" aria-label="At a glance">
   <div class="wrap">
-    <div class="stat"><b>~2 min</b><span>typical time to reply</span></div>
-    <div class="stat"><b>98%</b><span>of messages answered within 15 min</span></div>
-    <div class="stat"><b>24 × 7</b><span>including late-night ad traffic</span></div>
-    <div class="stat"><b>₹0.15</b><span>average AI cost per reply</span></div>
+    <div class="stat"><b>24 × 7</b><span>answers at 2 am, on Sundays, during sales</span></div>
+    <div class="stat"><b>3</b><span>languages: English, Hindi, Hinglish</span></div>
+    <div class="stat"><b>5</b><span>ways to respond — it picks the right one</span></div>
+    <div class="stat"><b>1 page</b><span>of business info to get started</span></div>
   </div>
-  <p class="strip-note">Measured over 30 days at Brahmi Store, the D2C brand Jawaab was built for.</p>
 </section>
 
 <!-- ───────── problem ───────── -->
@@ -421,12 +435,12 @@ footer a:hover { color: var(--ink); }
       <div class="p-card reveal">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
         <h3>Leads go cold</h3>
-        <p>A parent asks "price?" at 11 pm. By the time you answer in the morning, they've bought something else.</p>
+        <p>A customer asks "price?" at 11 pm. By the time you answer in the morning, they've bought something else.</p>
       </div>
       <div class="p-card reveal">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
         <h3>Same questions, all day</h3>
-        <p>Price, dosage, COD, delivery, "is it safe?" — typed out by hand, hundreds of times a week.</p>
+        <p>Price, sizes, COD, delivery time, "is it original?" — typed out by hand, hundreds of times a week.</p>
       </div>
       <div class="p-card reveal">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></div>
@@ -463,9 +477,9 @@ footer a:hover { color: var(--ink); }
       <article class="tile t-2 reveal">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 22V4a1 1 0 0 1 1-1h12l-2 5 2 5H5"/></svg></div>
         <h3>"Needs you" queue</h3>
-        <p>Complaints, side-effects, bulk orders and "talk to a human" are flagged with a reason — urgent ones first.</p>
+        <p>Complaints, refunds, bulk orders and "talk to a human" are flagged with a reason — urgent ones first.</p>
         <div class="tile-visual mini-list">
-          <div class="mini-row"><i class="bar-l" style="background:var(--red)"></i><span class="who">Anita</span><span class="why">Reaction after 2 doses</span></div>
+          <div class="mini-row"><i class="bar-l" style="background:var(--red)"></i><span class="who">Anita</span><span class="why">Damaged parcel received</span></div>
           <div class="mini-row"><i class="bar-l" style="background:var(--saffron)"></i><span class="who">Rahul</span><span class="why">Order not delivered</span></div>
         </div>
       </article>
@@ -491,7 +505,7 @@ footer a:hover { color: var(--ink); }
       <article class="tile t-2 reveal">
         <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
         <h3>Quick replies</h3>
-        <p>Type <span class="kbd">/price</span> or <span class="kbd">/dose</span> to send a saved answer — and the AI can use them too.</p>
+        <p>Type <span class="kbd">/price</span> or <span class="kbd">/sizes</span> to send a saved answer — and the AI can use them too.</p>
       </article>
 
       <article class="tile t-2 reveal">
@@ -509,7 +523,7 @@ footer a:hover { color: var(--ink); }
     <div class="reveal">
       <span class="eyebrow">Trained on your business</span>
       <h2 style="font-size:clamp(32px,4.2vw,50px);margin-top:14px">One page of business info. Every answer comes from it.</h2>
-      <p style="margin-top:18px;font-size:18px;color:var(--ink-2)">Write your prices, policies, dosage table and FAQs once — or let us draft it from your website and past chats. The AI answers only from what you wrote, and never makes up a price or a promise.</p>
+      <p style="margin-top:18px;font-size:18px;color:var(--ink-2)">Write your prices, policies, size charts, menus or fee structures once — or let us draft it from your website and past chats. The AI answers only from what you wrote, and never makes up a price or a promise.</p>
       <ul class="check-list">
         <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Versioned and editable</b> — change a price, and the next reply uses it.</span></li>
         <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Your tone, your rules</b> — edit the AI's instructions in plain English.</span></li>
@@ -525,25 +539,50 @@ footer a:hover { color: var(--ink); }
         <button role="tab" aria-selected="false" aria-controls="c4" id="t4">Hand-over</button>
       </div>
       <div class="convo" role="tabpanel" id="c1" aria-labelledby="t1">
-        <div class="b in">Bottle pe "Brain Buddy" likha hai, ye original hai na?<span class="t">8:12 pm</span></div>
-        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Bilkul original hai, chinta mat kijiye 🙏 Purani bottles pe <b>"Brain Buddy"</b> likha hai, nayi pe <b>"Brahmi Store"</b> — formula aur herbs bilkul same hain.<span class="t">8:12 pm ✓✓</span></div>
-        <div class="why-card">Why: label-change question answered from Business info · labels: Ordered</div>
+        <div class="biz">Skincare brand</div>
+        <div class="b in">Ye vitamin C serum oily skin pe suit karega? Aur original hai na?<span class="t">8:12 pm</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Haan, 100% original hai 😊 Ye <b>lightweight, non-greasy</b> formula hai — oily skin ke liye perfect. Subah sunscreen se pehle <b>2–3 drops</b> lagaiye.<span class="t">8:12 pm ✓✓</span></div>
+        <div class="why-card">Why: product question answered from business info · labels: Oily skin, Interested</div>
       </div>
       <div class="convo" role="tabpanel" id="c2" aria-labelledby="t2" hidden>
-        <div class="b in">Is it safe for a 7 year old with ADHD? Any side effects?<span class="t">10:03 am</span></div>
-        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Yes — it's <b>100% herbal</b> with no side-effects 😊 For a 7-year-old with ADHD: <b>5 ml at night</b> for 5–7 days, then <b>morning and night</b>. Give it regularly for 1–2 months alongside therapy.<span class="t">10:03 am ✓✓</span></div>
-        <div class="why-card">Why: safety + dosage from the dosage table · labels: ADHD, Dosage question</div>
+        <div class="biz">Coaching institute</div>
+        <div class="b in">Do you have a weekend batch for JEE? What are the fees?<span class="t">10:03 am</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Yes! Our <b>JEE weekend batch</b> runs Sat–Sun, 9 am–1 pm, starting 7 December. Fees are <b>₹48,000 a year</b>, payable in 4 instalments. Shall I book you a free demo class?<span class="t">10:03 am ✓✓</span></div>
+        <div class="why-card">Why: schedule and fees from business info · labels: JEE, Hot lead</div>
       </div>
       <div class="convo" role="tabpanel" id="c3" aria-labelledby="t3" hidden>
-        <div class="b in">क्या कैश ऑन डिलीवरी मिलेगा?<span class="t">6:20 pm</span></div>
-        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>जी हाँ 🙏 Amazon पर <b>कैश ऑन डिलीवरी</b> उपलब्ध है, और डिलीवरी फ्री है। ऑर्डर यहाँ से करें:<br>amazon.in/dp/…<span class="t">6:20 pm ✓✓</span></div>
-        <div class="why-card">Why: COD question · replied in Hindi (Devanagari) like the customer</div>
+        <div class="biz">Home bakery</div>
+        <div class="b in">क्या रविवार को एगलेस चॉकलेट केक मिल जाएगा?<span class="t">6:20 pm</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>जी हाँ 🎂 रविवार के लिए <b>एगलेस चॉकलेट केक</b> मिल जाएगा — 1 kg ₹850 का है। कृपया शनिवार शाम 6 बजे तक ऑर्डर कन्फ़र्म कर दें।<span class="t">6:20 pm ✓✓</span></div>
+        <div class="why-card">Why: menu and order cut-off from business info · replied in Hindi like the customer</div>
       </div>
       <div class="convo" role="tabpanel" id="c4" aria-labelledby="t4" hidden>
-        <div class="b in">I want 50 bottles for my clinic. Can we discuss pricing?<span class="t">11:47 am</span></div>
-        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Thank you 🙏 For a 50-bottle clinic order, our founder will personally get back to you with the details very soon.<span class="t">11:47 am ✓✓</span></div>
-        <div class="why-card">⚑ Flagged for you: "Bulk clinic order — 50 bottles" · label: Bulk / business</div>
+        <div class="biz">Furniture store</div>
+        <div class="b in">My sofa arrived with a torn cushion. This is really disappointing.<span class="t">11:47 am</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>I'm really sorry about this 🙏 Could you share a photo of the cushion and your order number? Our team will personally sort out a replacement for you today.<span class="t">11:47 am ✓✓</span></div>
+        <div class="why-card">⚑ Flagged for you (urgent): "Damaged sofa delivered" · label: Complaint</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── use cases ───────── -->
+<section class="section" id="use-cases">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Use cases</span>
+      <h2>For any business that sells on WhatsApp.</h2>
+      <p>If your customers ask the same questions before they buy, Jawaab can answer them — in your words, with your prices, at any hour.</p>
+    </div>
+    <div class="uses">
+      <article class="use reveal"><div class="em">🛍️</div><h3>Online brands</h3><p>Turn ad clicks into orders, answer COD and delivery questions, chase abandoned interest.</p><div class="q"><span>Is COD available?</span><span>When will it reach Pune?</span></div></article>
+      <article class="use reveal"><div class="em">✨</div><h3>Beauty &amp; skincare</h3><p>Recommend the right product for each skin or hair type, explain how to use it.</p><div class="q"><span>Will this suit oily skin?</span><span>Can I use it with retinol?</span></div></article>
+      <article class="use reveal"><div class="em">👗</div><h3>Fashion &amp; apparel</h3><p>Size charts, fabric, fit and exchange policy — answered from your catalogue.</p><div class="q"><span>Size M chest kitna hai?</span><span>Exchange ho jayega?</span></div></article>
+      <article class="use reveal"><div class="em">🎂</div><h3>Food, bakeries &amp; kitchens</h3><p>Menus, eggless options, delivery areas and order cut-off times.</p><div class="q"><span>Eggless cake for Sunday?</span><span>Do you deliver to Sector 62?</span></div></article>
+      <article class="use reveal"><div class="em">🎓</div><h3>Coaching &amp; education</h3><p>Batches, fees, instalments and demo classes — and every lead labelled by course.</p><div class="q"><span>Weekend JEE batch?</span><span>Fees in instalments?</span></div></article>
+      <article class="use reveal"><div class="em">🩺</div><h3>Clinics &amp; wellness</h3><p>Timings, services and pricing. Anything medical goes straight to your team.</p><div class="q"><span>Is Dr. Mehta available Saturday?</span><span>Physio session price?</span></div></article>
+      <article class="use reveal"><div class="em">🏠</div><h3>Real estate</h3><p>Qualify buyers by budget and location, share project details, line up site visits.</p><div class="q"><span>2BHK under 60 lakh?</span><span>Site visit this Sunday?</span></div></article>
+      <article class="use reveal"><div class="em">🧳</div><h3>Travel &amp; local services</h3><p>Packages, availability and quotes for tours, salons, repairs, events and more.</p><div class="q"><span>Goa package for 4?</span><span>AC service tomorrow?</span></div></article>
     </div>
   </div>
 </section>
@@ -628,10 +667,10 @@ footer a:hover { color: var(--ink); }
       <div class="dash-row">
         <div class="dash-chart" style="margin-top:0">
           <div class="h"><span>What customers ask</span></div>
-          <div class="hbar"><span>Dosage</span><span class="track"><span class="fill" style="width:100%;display:block"></span></span><em>128</em></div>
-          <div class="hbar"><span>Price</span><span class="track"><span class="fill" style="width:74%;display:block"></span></span><em>95</em></div>
-          <div class="hbar"><span>COD / payment</span><span class="track"><span class="fill" style="width:46%;display:block"></span></span><em>59</em></div>
-          <div class="hbar"><span>Is it safe</span><span class="track"><span class="fill" style="width:33%;display:block"></span></span><em>42</em></div>
+          <div class="hbar"><span>Price</span><span class="track"><span class="fill" style="width:100%;display:block"></span></span><em>128</em></div>
+          <div class="hbar"><span>Delivery time</span><span class="track"><span class="fill" style="width:74%;display:block"></span></span><em>95</em></div>
+          <div class="hbar"><span>Sizes &amp; fit</span><span class="track"><span class="fill" style="width:46%;display:block"></span></span><em>59</em></div>
+          <div class="hbar"><span>COD / payment</span><span class="track"><span class="fill" style="width:33%;display:block"></span></span><em>42</em></div>
         </div>
         <div class="dash-chart" style="margin-top:0">
           <div class="h"><span>Customer journey</span></div>
@@ -646,20 +685,20 @@ footer a:hover { color: var(--ink); }
   </div>
 </section>
 
-<!-- ───────── story ───────── -->
+<!-- ───────── customer story ───────── -->
 <section class="section">
   <div class="wrap">
     <div class="story reveal">
       <div>
-        <span class="eyebrow">Built by a founder, for his own brand</span>
-        <h2>Jawaab runs the WhatsApp of Brahmi Store every day.</h2>
-        <p>Brahmi Store sells an Ayurvedic brain-health syrup to parents across India through Instagram ads and Amazon. Its founder built Jawaab because no tool could answer worried parents in Hinglish at 11 pm, accurately, without sounding like a bot. Now we're opening it to other brands.</p>
+        <span class="eyebrow">Customer story</span>
+        <h2>Brahmi Store runs its WhatsApp on Jawaab.</h2>
+        <p>Brahmi Store sells an Ayurvedic brain-health syrup to parents across India through Instagram ads and Amazon. Its founder built Jawaab because no tool could answer worried parents in Hinglish at 11 pm, accurately, without sounding like a bot. It now handles the store's WhatsApp every day — and we're opening it to other businesses.</p>
       </div>
       <div class="story-facts">
-        <div class="fact"><b>1,100+</b><span>customer chats imported and organised</span></div>
         <div class="fact"><b>~2 min</b><span>typical reply time, day or night</span></div>
-        <div class="fact"><b>3</b><span>languages handled: English, Hindi, Hinglish</span></div>
-        <div class="fact"><b>16</b><span>labels applied automatically by the AI</span></div>
+        <div class="fact"><b>98%</b><span>of messages answered within 15 minutes</span></div>
+        <div class="fact"><b>1,100+</b><span>past customer chats imported and organised</span></div>
+        <div class="fact"><b>₹0.15</b><span>average AI cost per reply</span></div>
       </div>
     </div>
   </div>
@@ -694,10 +733,10 @@ footer a:hover { color: var(--ink); }
     </div>
     <div class="faq">
       <details><summary>Do I need the WhatsApp Business API?</summary><p>Yes. Jawaab works on the official WhatsApp Business API, connected through a provider such as MSG91. If you're not on the API yet, we'll walk you through getting set up with your business number.</p></details>
-      <details><summary>Will the AI make things up?</summary><p>It answers only from the business info you write, and it's told never to invent prices, policies, doses or delivery dates. When it isn't sure, or the topic is sensitive, it flags the chat for you. Every decision is logged with its reason, and you can test it on any chat before going live.</p></details>
+      <details><summary>Will the AI make things up?</summary><p>It answers only from the business info you write, and it's told never to invent prices, policies, stock or delivery dates. When it isn't sure, or the topic is sensitive, it flags the chat for you. Every decision is logged with its reason, and you can test it on any chat before going live.</p></details>
       <details><summary>Which languages does it understand?</summary><p>English, Hindi (Devanagari) and Hinglish (Hindi typed in Roman letters), and it replies in the same language as the customer's latest message. Other languages can be added.</p></details>
       <details><summary>Can I keep replying myself?</summary><p>Of course. Jawaab is first a team inbox. When you reply in a chat, the AI steps back for that conversation. You can also pause the AI for any single chat, or keep it in Suggest mode so nothing goes out without your tap.</p></details>
-      <details><summary>What kind of businesses is it for?</summary><p>D2C brands and small businesses that sell through Instagram, Facebook or Click-to-WhatsApp ads and get lots of repeat questions on WhatsApp — health and wellness, beauty, food, education, local services.</p></details>
+      <details><summary>What kind of businesses is it for?</summary><p>Any business where customers ask questions on WhatsApp before they buy: online brands, beauty and fashion, food and bakeries, coaching and education, clinics and wellness, real estate, travel and local services. It works especially well if you run Instagram, Facebook or Click-to-WhatsApp ads.</p></details>
       <details><summary>How much does it cost?</summary><p>We're in early access and onboarding a small number of brands personally. Pricing will be simple and based on the size of your inbox. AI replies themselves cost only paise each. Write to us and we'll share details for your volume.</p></details>
       <details><summary>Is my customer data safe?</summary><p>Your chats live in your own workspace, are visible only to your team, and can be exported or deleted at any time.</p></details>
     </div>
