@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jawaab — the AI WhatsApp inbox that answers every customer</title>
+<meta name="description" content="Jawaab is an AI-powered WhatsApp inbox for D2C brands. It learns your business, replies in seconds in English, Hindi or Hinglish, labels every customer and flags the chats that need you." />
+<meta property="og:title" content="Jawaab — every customer gets the right answer, in seconds" />
+<meta property="og:description" content="AI WhatsApp inbox for D2C brands: replies in your customer's language, labels leads, remembers customers and flags the chats that need you." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#0d4f43" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #0f1c19;
+  --ink-2: #44524e;
+  --ink-3: #75837f;
+  --line: #e4e7e1;
+  --line-2: #d3d9d1;
+  --bg: #fbfaf6;
+  --bg-2: #f3f1ea;
+  --card: #ffffff;
+  --brand: #0d4f43;
+  --brand-2: #127a63;
+  --brand-3: #1fb57f;
+  --mint: #dff5e9;
+  --saffron: #f2a516;
+  --saffron-soft: #fff3d6;
+  --red: #d93a3a;
+  --red-soft: #fde8e6;
+  --bubble-in: #ffffff;
+  --bubble-out: #dcf8c6;
+  --chat-bg: #efe9df;
+  --radius: 18px;
+  --shadow: 0 1px 2px rgba(15, 28, 25, .05), 0 8px 24px -8px rgba(15, 28, 25, .12);
+  --shadow-lg: 0 2px 4px rgba(15, 28, 25, .04), 0 24px 60px -18px rgba(15, 28, 25, .28);
+  --display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img, svg { display: block; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.08; margin: 0; }
+p { margin: 0; }
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 640px) { .wrap { padding: 0 16px; } }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font: 600 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--brand-2); }
+.eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--saffron); border-radius: 2px; }
+.section { padding: 112px 0; }
+@media (max-width: 760px) { .section { padding: 76px 0; } }
+.section-head { max-width: 720px; margin-bottom: 56px; }
+.section-head h2 { font-size: clamp(32px, 4.4vw, 52px); margin-top: 14px; }
+.section-head p { margin-top: 18px; font-size: 18px; color: var(--ink-2); }
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 999px; font: 600 15.5px/1 var(--sans); text-decoration: none; transition: transform .15s, background .15s, box-shadow .15s; white-space: nowrap; }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--brand); color: #fff; box-shadow: 0 6px 20px -8px rgba(13, 79, 67, .7); }
+.btn-primary:hover { background: #0a4036; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-2); }
+.btn-ghost:hover { background: #fff; }
+.btn-sm { height: 40px; padding: 0 18px; font-size: 14.5px; }
+
+/* nav */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 246, .82); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav .wrap { display: flex; align-items: center; height: 70px; gap: 28px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font: 800 22px/1 var(--display); letter-spacing: -0.03em; text-decoration: none; }
+.logo-mark { width: 34px; height: 34px; }
+.nav-links { display: flex; gap: 26px; margin-left: 12px; }
+.nav-links a { text-decoration: none; font-size: 15px; color: var(--ink-2); font-weight: 500; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.menu-btn { display: none; margin-left: auto; width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line-2); background: #fff; align-items: center; justify-content: center; cursor: pointer; }
+.mobile-menu { display: none; }
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .menu-btn { display: inline-flex; }
+  .mobile-menu.open { display: block; border-top: 1px solid var(--line); background: var(--bg); padding: 10px 16px 18px; }
+  .mobile-menu a { display: block; padding: 12px 4px; text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--line); }
+  .mobile-menu .btn { margin-top: 14px; width: 100%; border: 0; }
+}
+
+/* hero */
+.hero { position: relative; padding: 72px 0 96px; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: -20% -10% auto auto; width: 820px; height: 820px; background: radial-gradient(closest-side, rgba(31, 181, 127, .18), transparent 70%); pointer-events: none; }
+.hero::after { content: ""; position: absolute; left: -200px; bottom: -260px; width: 620px; height: 620px; background: radial-gradient(closest-side, rgba(242, 165, 22, .14), transparent 70%); pointer-events: none; }
+.hero-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 56px; } }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 13.5px; color: var(--ink-2); box-shadow: var(--shadow); }
+.pill b { background: var(--saffron-soft); color: #8a5a00; border-radius: 999px; padding: 3px 10px; font-weight: 600; font-size: 12px; }
+.hero h1 { font-size: clamp(42px, 6.3vw, 78px); margin-top: 22px; font-weight: 800; }
+.hero h1 .hl { position: relative; white-space: nowrap; color: var(--brand); }
+.hero h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .2em; background: var(--saffron); opacity: .38; border-radius: 4px; z-index: -1; }
+.hero .lede { margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 560px; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.hero-trust { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 34px; font-size: 14px; color: var(--ink-2); }
+.hero-trust span { display: inline-flex; align-items: center; gap: 8px; }
+.tick { width: 18px; height: 18px; border-radius: 50%; background: var(--mint); color: var(--brand-2); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+
+/* phone mock */
+.stage { position: relative; display: flex; justify-content: center; }
+.phone { position: relative; width: 360px; max-width: 100%; border-radius: 40px; background: #101615; padding: 11px; box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.04) inset; }
+.screen { border-radius: 30px; overflow: hidden; background: var(--chat-bg); height: 610px; display: flex; flex-direction: column; }
+.chat-top { display: flex; align-items: center; gap: 10px; padding: 14px 14px 12px; background: var(--brand); color: #fff; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #f7c873, #e9875d); flex: none; display: flex; align-items: center; justify-content: center; font: 700 14px/1 var(--sans); color: #fff; }
+.chat-top b { display: block; font-size: 15px; font-weight: 600; }
+.chat-top small { font-size: 12px; opacity: .8; }
+.chat-body { flex: 1; padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px); background-size: 14px 14px; }
+.day { align-self: center; font-size: 11.5px; background: #fff; color: var(--ink-2); padding: 3px 10px; border-radius: 8px; box-shadow: 0 1px .5px rgba(0,0,0,.12); }
+.b { max-width: 84%; padding: 7px 10px 6px; border-radius: 10px; font-size: 13.6px; line-height: 1.42; box-shadow: 0 1px .5px rgba(0,0,0,.13); position: relative; }
+.b .t { display: block; text-align: right; font-size: 10.5px; color: var(--ink-3); margin-top: 2px; }
+.b.in { align-self: flex-start; background: var(--bubble-in); border-top-left-radius: 3px; }
+.b.out { align-self: flex-end; background: var(--bubble-out); border-top-right-radius: 3px; }
+.b.ai .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 600; color: var(--brand-2); margin-bottom: 2px; }
+.typing { align-self: flex-start; background: #fff; border-radius: 10px; padding: 10px 12px; display: flex; gap: 4px; box-shadow: 0 1px .5px rgba(0,0,0,.13); }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: #9aa6a2; animation: blink 1.2s infinite; }
+.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
+.chat-input { display: flex; gap: 8px; padding: 8px 10px 12px; }
+.chat-input div { flex: 1; height: 40px; border-radius: 20px; background: #fff; font-size: 13px; color: var(--ink-3); display: flex; align-items: center; padding: 0 14px; }
+.chat-input span { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-2); display: flex; align-items: center; justify-content: center; }
+.float { position: absolute; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; box-shadow: var(--shadow-lg); font-size: 13px; width: 210px; animation: bob 6s ease-in-out infinite; }
+.float .k { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.stage { justify-content: flex-end; min-height: 632px; }
+.float-1 { left: 0; top: 46px; }
+.float-2 { left: 0; top: 250px; animation-delay: -2s; width: 196px; }
+.float-3 { left: 0; top: 446px; animation-delay: -4s; width: 214px; }
+@media (max-width: 1180px) and (min-width: 981px) { .float { display: none; } .stage { justify-content: center; } }
+@media (max-width: 980px) { .stage { justify-content: center; } .float { left: calc(50% - 400px); } }
+@media (max-width: 860px) { .float { display: none; } .stage { min-height: 0; } }
+@media (max-width: 560px) { .screen { height: 560px; } }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; background: var(--bg-2); padding: 3px 9px; font-size: 12px; font-weight: 500; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.flag { display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; padding: 6px 8px; font-size: 12.5px; font-weight: 500; }
+.flag.red { background: var(--red-soft); color: #9b1c1c; }
+.flag.amber { background: var(--saffron-soft); color: #7a4f00; }
+
+/* stats strip */
+.strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+.strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 34px 24px; border-left: 1px solid var(--line); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat b { display: block; font: 800 clamp(30px, 3.4vw, 42px)/1 var(--display); letter-spacing: -0.03em; color: var(--brand); }
+.stat span { display: block; margin-top: 8px; font-size: 14.5px; color: var(--ink-2); }
+.strip-note { text-align: center; font-size: 12.5px; color: var(--ink-3); padding: 0 0 18px; }
+@media (max-width: 760px) { .strip .wrap { grid-template-columns: 1fr 1fr; } .stat { padding: 24px 16px; } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+/* problem */
+.problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
+.p-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+.p-card .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--red-soft); color: var(--red); display: flex; align-items: center; justify-content: center; }
+.p-card h3 { font-size: 21px; margin-top: 20px; }
+.p-card p { margin-top: 10px; color: var(--ink-2); font-size: 15.5px; }
+
+/* bento */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.tile { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px; overflow: hidden; display: flex; flex-direction: column; }
+.tile h3 { font-size: 23px; }
+.tile p { margin-top: 10px; color: var(--ink-2); font-size: 15.5px; }
+.tile .ico { width: 42px; height: 42px; border-radius: 12px; background: var(--mint); color: var(--brand-2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.t-4 { grid-column: span 4; } .t-3 { grid-column: span 3; } .t-2 { grid-column: span 2; }
+.tile.dark { background: var(--brand); color: #fff; border-color: var(--brand); }
+.tile.dark p { color: rgba(255,255,255,.78); }
+.tile.dark .ico { background: rgba(255,255,255,.12); color: #9ff0c8; }
+@media (max-width: 980px) { .t-4, .t-3, .t-2 { grid-column: span 6; } }
+.tile-visual { margin-top: 24px; }
+.mini-list { display: flex; flex-direction: column; gap: 8px; }
+.mini-row { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 13.5px; }
+.mini-row .who { font-weight: 600; }
+.mini-row .why { color: var(--ink-2); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini-row .ago { color: var(--ink-3); font-size: 12px; }
+.bar-l { width: 4px; align-self: stretch; border-radius: 4px; }
+.decisions { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+@media (max-width: 760px) { .decisions { grid-template-columns: 1fr 1fr; } }
+.decision { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 14px; }
+.decision b { display: block; font: 700 15px/1.2 var(--display); }
+.decision span { display: block; font-size: 12.5px; margin-top: 6px; color: rgba(255,255,255,.72); line-height: 1.4; }
+.kbd { display: inline-block; font: 600 12.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg-2); border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 6px; padding: 4px 7px; }
+.memory { display: grid; grid-template-columns: 96px 1fr; gap: 6px 12px; font-size: 13.5px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.memory dt { color: var(--ink-3); } .memory dd { margin: 0; font-weight: 500; }
+.bars { display: flex; align-items: flex-end; gap: 4px; height: 96px; }
+.bars i { flex: 1; background: var(--brand-3); border-radius: 4px 4px 0 0; opacity: .9; }
+
+/* how */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: s; }
+@media (max-width: 980px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+.step { position: relative; padding: 28px 24px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+.step::before { counter-increment: s; content: counter(s, decimal-leading-zero); font: 800 15px/1 var(--display); color: var(--saffron); display: block; margin-bottom: 18px; }
+.step h3 { font-size: 20px; }
+.step p { margin-top: 10px; color: var(--ink-2); font-size: 15px; }
+.step small { display: block; margin-top: 14px; font-size: 13px; color: var(--brand-2); font-weight: 600; }
+
+/* languages */
+.lang { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+@media (max-width: 980px) { .lang { grid-template-columns: 1fr; } }
+.tabs { display: inline-flex; padding: 4px; background: var(--bg-2); border-radius: 999px; margin-bottom: 18px; flex-wrap: wrap; }
+.tabs button { border: 0; background: transparent; font: 600 14px/1 var(--sans); padding: 10px 16px; border-radius: 999px; cursor: pointer; color: var(--ink-2); }
+.tabs button[aria-selected="true"] { background: #fff; color: var(--ink); box-shadow: var(--shadow); }
+.convo { background: var(--chat-bg); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-height: 300px; border: 1px solid var(--line); background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px); background-size: 14px 14px; }
+.convo .b { font-size: 14.5px; max-width: 88%; }
+.convo[hidden] { display: none; }
+.why-card { margin-top: 4px; align-self: flex-end; font-size: 12.5px; color: var(--ink-2); background: rgba(255,255,255,.7); border: 1px dashed var(--line-2); border-radius: 10px; padding: 6px 10px; max-width: 88%; }
+.check-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
+.check-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; color: var(--ink-2); }
+.check-list li b { color: var(--ink); font-weight: 600; }
+
+/* control */
+.control { background: var(--ink); color: #fff; border-radius: 32px; padding: 72px 64px; position: relative; overflow: hidden; }
+.control::before { content: ""; position: absolute; right: -180px; top: -180px; width: 520px; height: 520px; background: radial-gradient(closest-side, rgba(31, 181, 127, .28), transparent 70%); }
+@media (max-width: 760px) { .control { padding: 44px 22px; border-radius: 24px; } }
+.control .section-head p { color: rgba(255,255,255,.72); }
+.control .eyebrow { color: #8ee8bd; }
+.modes { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .modes { grid-template-columns: 1fr; } }
+.mode { border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 26px; background: rgba(255,255,255,.04); }
+.mode.on { background: rgba(31, 181, 127, .12); border-color: rgba(31, 181, 127, .55); }
+.mode h3 { font-size: 22px; display: flex; align-items: center; gap: 10px; }
+.mode p { margin-top: 10px; color: rgba(255,255,255,.72); font-size: 15px; }
+.rails { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 28px; margin-top: 44px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.12); }
+@media (max-width: 860px) { .rails { grid-template-columns: 1fr; } }
+.rail { display: flex; gap: 12px; font-size: 15px; color: rgba(255,255,255,.82); }
+.rail svg { flex: none; margin-top: 3px; color: #8ee8bd; }
+
+/* dashboard mock */
+.dash { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: center; }
+@media (max-width: 980px) { .dash { grid-template-columns: 1fr; } }
+.dash-mock { background: #fff; border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow-lg); padding: 22px; }
+.dash-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.kpi { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.kpi small { display: block; font-size: 12px; color: var(--ink-3); }
+.kpi b { display: block; font: 800 24px/1.1 var(--display); margin-top: 4px; }
+.kpi i { font-style: normal; font-size: 11.5px; color: var(--brand-2); font-weight: 600; }
+.dash-chart { margin-top: 14px; border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.dash-chart .h { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; font-weight: 500; }
+.dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.hbar { display: grid; grid-template-columns: 96px 1fr 26px; align-items: center; gap: 8px; font-size: 12.5px; margin-top: 7px; }
+.hbar .track { height: 8px; background: var(--bg-2); border-radius: 0 4px 4px 0; }
+.hbar .fill { height: 100%; background: var(--brand-3); border-radius: 0 4px 4px 0; }
+.hbar em { font-style: normal; text-align: right; color: var(--ink-2); }
+@media (max-width: 560px) { .dash-kpis { grid-template-columns: 1fr 1fr; } .dash-row { grid-template-columns: 1fr; } }
+
+/* story */
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; background: var(--saffron-soft); border: 1px solid #f4dfae; border-radius: 32px; padding: 60px; }
+@media (max-width: 900px) { .story { grid-template-columns: 1fr; padding: 36px 22px; border-radius: 24px; } }
+.story h2 { font-size: clamp(30px, 3.8vw, 44px); margin-top: 14px; }
+.story p { margin-top: 16px; color: #5c4a20; font-size: 17px; }
+.story-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fact { background: #fff; border-radius: 18px; padding: 22px; border: 1px solid #f1e2bd; }
+.fact b { display: block; font: 800 34px/1 var(--display); letter-spacing: -0.03em; color: var(--brand); }
+.fact span { display: block; margin-top: 8px; font-size: 14px; color: var(--ink-2); }
+
+/* features list */
+.more { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+@media (max-width: 980px) { .more { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .more { grid-template-columns: 1fr; } }
+.more div { background: #fff; padding: 24px; }
+.more h4 { margin: 0; font: 700 16.5px/1.3 var(--display); }
+.more p { margin-top: 6px; font-size: 14.5px; color: var(--ink-2); }
+
+/* faq */
+.faq { max-width: 820px; margin: 0 auto; }
+details { border-bottom: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; padding: 24px 0; font: 600 19px/1.35 var(--display); display: flex; justify-content: space-between; gap: 24px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font: 400 28px/1 var(--sans); color: var(--brand-2); transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding: 0 0 24px; color: var(--ink-2); font-size: 16px; max-width: 720px; }
+
+/* cta */
+.cta { text-align: center; background: var(--brand); color: #fff; border-radius: 32px; padding: 84px 32px; position: relative; overflow: hidden; }
+.cta::before, .cta::after { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(242, 165, 22, .28), transparent 70%); }
+.cta::before { left: -140px; top: -160px; } .cta::after { right: -140px; bottom: -200px; background: radial-gradient(closest-side, rgba(31, 181, 127, .5), transparent 70%); }
+.cta > * { position: relative; }
+.cta h2 { font-size: clamp(34px, 5vw, 60px); max-width: 820px; margin: 0 auto; }
+.cta p { margin: 20px auto 0; max-width: 600px; font-size: 18px; color: rgba(255,255,255,.8); }
+.cta .btn-primary { background: #fff; color: var(--brand); margin-top: 34px; height: 56px; padding: 0 30px; font-size: 16.5px; }
+.cta .btn-primary:hover { background: var(--saffron-soft); }
+.cta small { display: block; margin-top: 16px; font-size: 14px; color: rgba(255,255,255,.7); }
+.cta small a { color: #fff; }
+@media (max-width: 760px) { .cta { padding: 56px 20px; border-radius: 24px; } }
+
+footer { padding: 48px 0 56px; color: var(--ink-3); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; align-items: center; }
+footer a { color: var(--ink-2); text-decoration: none; }
+footer a:hover { color: var(--ink); }
+.foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .float, .typing i { animation: none; } html { scroll-behavior: auto; } }
+:focus-visible { outline: 3px solid var(--saffron); outline-offset: 2px; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<!-- ───────── nav ───────── -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Jawaab home">
+      <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#0d4f43"/><path d="M18 20h28a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H32l-9 7v-7h-5a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6Z" fill="#fff"/><path d="M24 33.5l5 4.5 11-11" fill="none" stroke="#1fb57f" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Jawaab
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#features">Features</a>
+      <a href="#ai">AI agent</a>
+      <a href="#how">How it works</a>
+      <a href="#dashboard">Insights</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href="mailto:hello@sisodiyaa.com?subject=Jawaab%20early%20access&amp;body=Hi%2C%20I%27d%20like%20early%20access%20to%20Jawaab.%0A%0ABusiness%20name%3A%0AWebsite%20%2F%20Instagram%3A%0AWhatsApp%20chats%20per%20day%20(approx)%3A%0A">Get early access</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features">Features</a>
+    <a href="#ai">AI agent</a>
+    <a href="#how">How it works</a>
+    <a href="#dashboard">Insights</a>
+    <a href="#faq">FAQ</a>
+    <a class="btn btn-primary" href="mailto:hello@sisodiyaa.com?subject=Jawaab%20early%20access">Get early access</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ───────── hero ───────── -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><b>Early access</b> Built for D2C brands selling on WhatsApp</span>
+      <h1>Every customer gets the <span class="hl">right answer</span>, in seconds.</h1>
+      <p class="lede">Jawaab is an AI-powered WhatsApp inbox. It learns your business, replies to every customer in their own language — English, Hindi or Hinglish — labels your leads, remembers each customer, and flags the chats that need you.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="mailto:hello@sisodiyaa.com?subject=Jawaab%20demo&amp;body=Hi%2C%20I%27d%20like%20a%20demo%20of%20Jawaab.%0A%0ABusiness%20name%3A%0AWhat%20we%20sell%3A%0AWhatsApp%20chats%20per%20day%20(approx)%3A%0A">
+          Book a demo
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="hero-trust">
+        <span><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>Official WhatsApp Business API</span>
+        <span><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>Your own business number</span>
+        <span><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>You stay in control</span>
+      </div>
+    </div>
+
+    <div class="stage" aria-label="Example: Jawaab answering a customer on WhatsApp">
+      <div class="phone">
+        <div class="screen">
+          <div class="chat-top">
+            <div class="avatar">P</div>
+            <div><b>Priya Sharma</b><small>from your Instagram ad</small></div>
+          </div>
+          <div class="chat-body">
+            <span class="day">Today</span>
+            <div class="b in">Hi, saw your ad. Price kya hai? 🙂<span class="t">9:41 pm</span></div>
+            <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Namaste Priya ji 🙏 <b>Brain Booster</b> 200 ml sirf <b>₹500</b> hai, free delivery ke saath. Cash on Delivery bhi available hai 😊<span class="t">9:41 pm ✓✓</span></div>
+            <div class="b in">Mera beta 4 saal ka hai, bolta kam hai. Kitna dena hai?<span class="t">9:42 pm</span></div>
+            <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Samajh sakti hoon 🙏 4 saal ke liye <b>5 ml raat ko</b>. 5–7 din baad <b>subah aur raat</b> dono waqt dein. Kam se kam 1–2 mahine regular dijiye.<span class="t">9:42 pm ✓✓</span></div>
+            <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+          <div class="chat-input">
+            <div>Message</div>
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M3 20.5 21 12 3 3.5 3 10l12 2-12 2z"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="float float-1" aria-hidden="true">
+        <div class="k"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Labelled automatically</div>
+        <div class="chips"><span class="chip"><i class="dot" style="background:#53bdeb"></i>New lead</span><span class="chip"><i class="dot" style="background:#06b6d4"></i>Speech delay</span><span class="chip"><i class="dot" style="background:#ffbc38"></i>Ready to buy</span></div>
+      </div>
+      <div class="float float-2" aria-hidden="true">
+        <div class="k"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>Remembered</div>
+        <dl class="memory" style="grid-template-columns:70px 1fr;padding:10px 12px;font-size:12.5px;background:#fff;border:0;margin:0">
+          <dt>Child</dt><dd>4 years</dd>
+          <dt>Concern</dt><dd>Speech delay</dd>
+          <dt>Language</dt><dd>Hinglish</dd>
+        </dl>
+      </div>
+      <div class="float float-3" aria-hidden="true">
+        <div class="k">Needs you · 2</div>
+        <div class="flag red">⚑ Side effect reported — urgent</div>
+        <div class="flag amber" style="margin-top:6px">⚑ Bulk order: 50 bottles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── stats ───────── -->
+<section class="strip" aria-label="Results">
+  <div class="wrap">
+    <div class="stat"><b>~2 min</b><span>typical time to reply</span></div>
+    <div class="stat"><b>98%</b><span>of messages answered within 15 min</span></div>
+    <div class="stat"><b>24 × 7</b><span>including late-night ad traffic</span></div>
+    <div class="stat"><b>₹0.15</b><span>average AI cost per reply</span></div>
+  </div>
+  <p class="strip-note">Measured over 30 days at Brahmi Store, the D2C brand Jawaab was built for.</p>
+</section>
+
+<!-- ───────── problem ───────── -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The problem</span>
+      <h2>Your ads work. Your WhatsApp can't keep up.</h2>
+      <p>Click-to-WhatsApp ads bring in a flood of chats — mostly at night, mostly the same ten questions, in three different languages. Every slow reply is a sale that walks away.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="p-card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Leads go cold</h3>
+        <p>A parent asks "price?" at 11 pm. By the time you answer in the morning, they've bought something else.</p>
+      </div>
+      <div class="p-card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h3>Same questions, all day</h3>
+        <p>Price, dosage, COD, delivery, "is it safe?" — typed out by hand, hundreds of times a week.</p>
+      </div>
+      <div class="p-card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+        <h3>Important chats get buried</h3>
+        <p>A complaint or a bulk order hides between a hundred "hi"s. Generic chatbots just make customers type "human".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── features bento ───────── -->
+<section class="section" id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>An inbox that thinks like your best salesperson.</h2>
+      <p>Jawaab isn't a flowchart bot. It reads the whole conversation, knows your business, and decides what to do — then does it.</p>
+    </div>
+
+    <div class="bento">
+      <article class="tile dark t-4 reveal" id="ai">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div>
+        <h3>An AI agent that decides, not just replies</h3>
+        <p>For every message it picks the best move — and tells you why.</p>
+        <div class="tile-visual decisions">
+          <div class="decision"><b>Write a reply</b><span>A custom answer from your business info.</span></div>
+          <div class="decision"><b>Quick reply</b><span>Sends your saved answer, word for word.</span></div>
+          <div class="decision"><b>Template</b><span>When WhatsApp's 24-hour window has closed.</span></div>
+          <div class="decision"><b>Stay quiet</b><span>"ok 👍" doesn't need an answer.</span></div>
+          <div class="decision"><b>Call you in</b><span>Answers, then flags the chat for you.</span></div>
+        </div>
+      </article>
+
+      <article class="tile t-2 reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 22V4a1 1 0 0 1 1-1h12l-2 5 2 5H5"/></svg></div>
+        <h3>"Needs you" queue</h3>
+        <p>Complaints, side-effects, bulk orders and "talk to a human" are flagged with a reason — urgent ones first.</p>
+        <div class="tile-visual mini-list">
+          <div class="mini-row"><i class="bar-l" style="background:var(--red)"></i><span class="who">Anita</span><span class="why">Reaction after 2 doses</span></div>
+          <div class="mini-row"><i class="bar-l" style="background:var(--saffron)"></i><span class="who">Rahul</span><span class="why">Order not delivered</span></div>
+        </div>
+      </article>
+
+      <article class="tile t-3 reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg></div>
+        <h3>Speaks your customer's language</h3>
+        <p>English stays English. Hinglish gets Hinglish. Hindi gets Hindi, in Devanagari. It matches the latest message, not a setting.</p>
+      </article>
+
+      <article class="tile t-3 reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
+        <h3>Remembers every customer</h3>
+        <p>Age, concerns, city, language and where they are in the journey — saved on the contact and used in every future reply.</p>
+      </article>
+
+      <article class="tile t-2 reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+        <h3>Auto-labelling</h3>
+        <p>Your labels, your rules. Write when each label applies; the AI keeps every chat labelled — New lead, Ordered, Complaint…</p>
+      </article>
+
+      <article class="tile t-2 reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Quick replies</h3>
+        <p>Type <span class="kbd">/price</span> or <span class="kbd">/dose</span> to send a saved answer — and the AI can use them too.</p>
+      </article>
+
+      <article class="tile t-2 reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></div>
+        <h3>Instant welcome for ad traffic</h3>
+        <p>First-time customers from Instagram and Facebook ads get your welcome message the moment they write.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── language + guardrails ───────── -->
+<section class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap lang">
+    <div class="reveal">
+      <span class="eyebrow">Trained on your business</span>
+      <h2 style="font-size:clamp(32px,4.2vw,50px);margin-top:14px">One page of business info. Every answer comes from it.</h2>
+      <p style="margin-top:18px;font-size:18px;color:var(--ink-2)">Write your prices, policies, dosage table and FAQs once — or let us draft it from your website and past chats. The AI answers only from what you wrote, and never makes up a price or a promise.</p>
+      <ul class="check-list">
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Versioned and editable</b> — change a price, and the next reply uses it.</span></li>
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Your tone, your rules</b> — edit the AI's instructions in plain English.</span></li>
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Test before it goes live</b> — type a pretend customer message and see exactly what it would send.</span></li>
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Waits for the full thought</b> — three quick messages get one complete answer.</span></li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="tabs" role="tablist" aria-label="Example conversations">
+        <button role="tab" aria-selected="true" aria-controls="c1" id="t1">Hinglish</button>
+        <button role="tab" aria-selected="false" aria-controls="c2" id="t2">English</button>
+        <button role="tab" aria-selected="false" aria-controls="c3" id="t3">हिंदी</button>
+        <button role="tab" aria-selected="false" aria-controls="c4" id="t4">Hand-over</button>
+      </div>
+      <div class="convo" role="tabpanel" id="c1" aria-labelledby="t1">
+        <div class="b in">Bottle pe "Brain Buddy" likha hai, ye original hai na?<span class="t">8:12 pm</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Bilkul original hai, chinta mat kijiye 🙏 Purani bottles pe <b>"Brain Buddy"</b> likha hai, nayi pe <b>"Brahmi Store"</b> — formula aur herbs bilkul same hain.<span class="t">8:12 pm ✓✓</span></div>
+        <div class="why-card">Why: label-change question answered from Business info · labels: Ordered</div>
+      </div>
+      <div class="convo" role="tabpanel" id="c2" aria-labelledby="t2" hidden>
+        <div class="b in">Is it safe for a 7 year old with ADHD? Any side effects?<span class="t">10:03 am</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Yes — it's <b>100% herbal</b> with no side-effects 😊 For a 7-year-old with ADHD: <b>5 ml at night</b> for 5–7 days, then <b>morning and night</b>. Give it regularly for 1–2 months alongside therapy.<span class="t">10:03 am ✓✓</span></div>
+        <div class="why-card">Why: safety + dosage from the dosage table · labels: ADHD, Dosage question</div>
+      </div>
+      <div class="convo" role="tabpanel" id="c3" aria-labelledby="t3" hidden>
+        <div class="b in">क्या कैश ऑन डिलीवरी मिलेगा?<span class="t">6:20 pm</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>जी हाँ 🙏 Amazon पर <b>कैश ऑन डिलीवरी</b> उपलब्ध है, और डिलीवरी फ्री है। ऑर्डर यहाँ से करें:<br>amazon.in/dp/…<span class="t">6:20 pm ✓✓</span></div>
+        <div class="why-card">Why: COD question · replied in Hindi (Devanagari) like the customer</div>
+      </div>
+      <div class="convo" role="tabpanel" id="c4" aria-labelledby="t4" hidden>
+        <div class="b in">I want 50 bottles for my clinic. Can we discuss pricing?<span class="t">11:47 am</span></div>
+        <div class="b out ai"><span class="tag">✦ Jawaab AI</span><br>Thank you 🙏 For a 50-bottle clinic order, our founder will personally get back to you with the details very soon.<span class="t">11:47 am ✓✓</span></div>
+        <div class="why-card">⚑ Flagged for you: "Bulk clinic order — 50 bottles" · label: Bulk / business</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── control ───────── -->
+<section class="section">
+  <div class="wrap">
+    <div class="control">
+      <div class="section-head reveal" style="position:relative">
+        <span class="eyebrow">You stay in control</span>
+        <h2>Start with suggestions. Switch on autopilot when you trust it.</h2>
+        <p>Every decision is logged with its reason. Approve, edit or dismiss suggestions — your feedback is recorded so the agent can be tuned to your brand.</p>
+      </div>
+      <div class="modes">
+        <div class="mode reveal">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Off</h3>
+          <p>A fast, shared WhatsApp inbox for your team — labels, quick replies, templates, search, starred messages.</p>
+        </div>
+        <div class="mode reveal">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Suggest</h3>
+          <p>The AI drafts the reply, labels the chat and flags what needs you. One tap to send, edit or dismiss.</p>
+        </div>
+        <div class="mode on reveal">
+          <h3><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Auto-reply</h3>
+          <p>The AI answers every customer in seconds, day and night. Chats that need you are still flagged so you can step in.</p>
+        </div>
+      </div>
+      <div class="rails">
+        <div class="rail reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Steps back when you're in the chat — it never talks over you.</div>
+        <div class="rail reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Never invents prices, policies or delivery dates.</div>
+        <div class="rail reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>No medical or legal advice — sensitive topics go to you, urgently.</div>
+        <div class="rail reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Daily message limits per chat, so nothing loops.</div>
+        <div class="rail reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Pause the AI for a single chat with one switch.</div>
+        <div class="rail reveal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Respects WhatsApp's 24-hour rule — templates only when it's closed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── how ───────── -->
+<section class="section" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Live in a day, not a quarter.</h2>
+      <p>No flowcharts to draw, no decision trees to maintain. Describe your business the way you'd brief a new team member.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Connect your number</h3><p>Use the official WhatsApp Business API through a provider like MSG91. Your number, your customers.</p><small>We help with setup</small></div>
+      <div class="step reveal"><h3>Bring your history</h3><p>Import past chats so nothing is lost. The AI reviews them, labels every customer and finds people still waiting.</p><small>Works with old chat exports</small></div>
+      <div class="step reveal"><h3>Write your business info</h3><p>Prices, policies, FAQs, tone. We draft it from your website and past replies — you edit.</p><small>One page, plain language</small></div>
+      <div class="step reveal"><h3>Test, then go live</h3><p>Try real questions in the sandbox, start in Suggest mode, then switch on Auto-reply when you're happy.</p><small>Change anything, any time</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── dashboard ───────── -->
+<section class="section" id="dashboard" style="background:var(--bg-2)">
+  <div class="wrap dash">
+    <div class="reveal">
+      <span class="eyebrow">Insights</span>
+      <h2 style="font-size:clamp(32px,4.2vw,50px);margin-top:14px">Know what your customers want — and when.</h2>
+      <p style="margin-top:18px;font-size:18px;color:var(--ink-2)">A dashboard and a contact book that fill themselves in. See how fast you reply, when people write, what they ask about, and where each customer is in the journey.</p>
+      <ul class="check-list">
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Contact book</b> — everyone who messages you, with labels, notes and AI memory. Export to CSV.</span></li>
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Response time</b> and who replied — you, the AI or the welcome message.</span></li>
+        <li><i class="tick"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i><span><b>Top questions</b> — so you know what to fix on your listing and in your ads.</span></li>
+      </ul>
+    </div>
+    <div class="dash-mock reveal" aria-label="Example dashboard">
+      <div class="dash-kpis">
+        <div class="kpi"><small>Customers who wrote</small><b>412</b><i>▲ 38% vs last month</i></div>
+        <div class="kpi"><small>Typical reply time</small><b>2 min</b><i>98% within 15 min</i></div>
+        <div class="kpi"><small>Needs you</small><b>3</b><i style="color:var(--red)">1 urgent</i></div>
+      </div>
+      <div class="dash-chart">
+        <div class="h"><span>Messages by hour</span><span>India time</span></div>
+        <div class="bars" aria-hidden="true">
+          <i style="height:22%"></i><i style="height:12%"></i><i style="height:4%"></i><i style="height:2%"></i><i style="height:2%"></i><i style="height:3%"></i><i style="height:9%"></i><i style="height:18%"></i><i style="height:38%"></i><i style="height:62%"></i><i style="height:44%"></i><i style="height:36%"></i><i style="height:40%"></i><i style="height:34%"></i><i style="height:31%"></i><i style="height:38%"></i><i style="height:42%"></i><i style="height:35%"></i><i style="height:48%"></i><i style="height:66%"></i><i style="height:92%"></i><i style="height:100%"></i><i style="height:70%"></i><i style="height:41%"></i>
+        </div>
+      </div>
+      <div class="dash-row">
+        <div class="dash-chart" style="margin-top:0">
+          <div class="h"><span>What customers ask</span></div>
+          <div class="hbar"><span>Dosage</span><span class="track"><span class="fill" style="width:100%;display:block"></span></span><em>128</em></div>
+          <div class="hbar"><span>Price</span><span class="track"><span class="fill" style="width:74%;display:block"></span></span><em>95</em></div>
+          <div class="hbar"><span>COD / payment</span><span class="track"><span class="fill" style="width:46%;display:block"></span></span><em>59</em></div>
+          <div class="hbar"><span>Is it safe</span><span class="track"><span class="fill" style="width:33%;display:block"></span></span><em>42</em></div>
+        </div>
+        <div class="dash-chart" style="margin-top:0">
+          <div class="h"><span>Customer journey</span></div>
+          <div class="hbar"><span>New lead</span><span class="track"><span class="fill" style="width:100%;display:block"></span></span><em>212</em></div>
+          <div class="hbar"><span>Ready to buy</span><span class="track"><span class="fill" style="width:51%;display:block"></span></span><em>108</em></div>
+          <div class="hbar"><span>Ordered</span><span class="track"><span class="fill" style="width:36%;display:block"></span></span><em>77</em></div>
+          <div class="hbar"><span>Repeat</span><span class="track"><span class="fill" style="width:12%;display:block"></span></span><em>26</em></div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--ink-3);text-align:right">Example data</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── story ───────── -->
+<section class="section">
+  <div class="wrap">
+    <div class="story reveal">
+      <div>
+        <span class="eyebrow">Built by a founder, for his own brand</span>
+        <h2>Jawaab runs the WhatsApp of Brahmi Store every day.</h2>
+        <p>Brahmi Store sells an Ayurvedic brain-health syrup to parents across India through Instagram ads and Amazon. Its founder built Jawaab because no tool could answer worried parents in Hinglish at 11 pm, accurately, without sounding like a bot. Now we're opening it to other brands.</p>
+      </div>
+      <div class="story-facts">
+        <div class="fact"><b>1,100+</b><span>customer chats imported and organised</span></div>
+        <div class="fact"><b>~2 min</b><span>typical reply time, day or night</span></div>
+        <div class="fact"><b>3</b><span>languages handled: English, Hindi, Hinglish</span></div>
+        <div class="fact"><b>16</b><span>labels applied automatically by the AI</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── everything else ───────── -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Everything you need</span>
+      <h2>Feels like WhatsApp Web. Works like a CRM.</h2>
+    </div>
+    <div class="more reveal">
+      <div><h4>Real-time shared inbox</h4><p>Unread counts, typing, delivery ticks — live across every open tab.</p></div>
+      <div><h4>Media &amp; voice notes</h4><p>Photos, videos, documents, voice notes and link previews, both ways.</p></div>
+      <div><h4>Message templates</h4><p>Approved templates with variables, for follow-ups after 24 hours.</p></div>
+      <div><h4>Search everything</h4><p>Find any chat or message, then jump straight to it.</p></div>
+      <div><h4>Labels &amp; filters</h4><p>Filter by label, unread, favourites or "needs you".</p></div>
+      <div><h4>Starred &amp; archived</h4><p>Keep important messages handy, hide finished chats.</p></div>
+      <div><h4>Review past chats</h4><p>The AI goes through old conversations and labels them for you.</p></div>
+      <div><h4>Any device</h4><p>Desktop and phone browser, with clean links to every chat.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── faq ───────── -->
+<section class="section" id="faq" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Do I need the WhatsApp Business API?</summary><p>Yes. Jawaab works on the official WhatsApp Business API, connected through a provider such as MSG91. If you're not on the API yet, we'll walk you through getting set up with your business number.</p></details>
+      <details><summary>Will the AI make things up?</summary><p>It answers only from the business info you write, and it's told never to invent prices, policies, doses or delivery dates. When it isn't sure, or the topic is sensitive, it flags the chat for you. Every decision is logged with its reason, and you can test it on any chat before going live.</p></details>
+      <details><summary>Which languages does it understand?</summary><p>English, Hindi (Devanagari) and Hinglish (Hindi typed in Roman letters), and it replies in the same language as the customer's latest message. Other languages can be added.</p></details>
+      <details><summary>Can I keep replying myself?</summary><p>Of course. Jawaab is first a team inbox. When you reply in a chat, the AI steps back for that conversation. You can also pause the AI for any single chat, or keep it in Suggest mode so nothing goes out without your tap.</p></details>
+      <details><summary>What kind of businesses is it for?</summary><p>D2C brands and small businesses that sell through Instagram, Facebook or Click-to-WhatsApp ads and get lots of repeat questions on WhatsApp — health and wellness, beauty, food, education, local services.</p></details>
+      <details><summary>How much does it cost?</summary><p>We're in early access and onboarding a small number of brands personally. Pricing will be simple and based on the size of your inbox. AI replies themselves cost only paise each. Write to us and we'll share details for your volume.</p></details>
+      <details><summary>Is my customer data safe?</summary><p>Your chats live in your own workspace, are visible only to your team, and can be exported or deleted at any time.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── cta ───────── -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Let your WhatsApp answer every customer — tonight.</h2>
+      <p>Tell us about your business. We'll set up a demo on your own questions and show you what Jawaab would reply.</p>
+      <a class="btn btn-primary" href="mailto:hello@sisodiyaa.com?subject=Jawaab%20early%20access&amp;body=Hi%2C%20I%27d%20like%20early%20access%20to%20Jawaab.%0A%0ABusiness%20name%3A%0AWhat%20we%20sell%3A%0AWebsite%20%2F%20Instagram%3A%0AWhatsApp%20chats%20per%20day%20(approx)%3A%0A">
+        Get early access
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <small>or email <a href="mailto:hello@sisodiyaa.com">hello@sisodiyaa.com</a></small>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top" style="font-size:18px">
+      <svg class="logo-mark" style="width:28px;height:28px" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#0d4f43"/><path d="M18 20h28a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H32l-9 7v-7h-5a6 6 0 0 1-6-6V26a6 6 0 0 1 6-6Z" fill="#fff"/><path d="M24 33.5l5 4.5 11-11" fill="none" stroke="#1fb57f" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Jawaab
+    </a>
+    <div class="foot-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:hello@sisodiyaa.com">Contact</a>
+    </div>
+    <span>© <span id="yr">2026</span> Jawaab. Made in India. WhatsApp is a trademark of Meta; Jawaab is not affiliated with Meta.</span>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav border
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+  btn.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(open));
+  });
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => { menu.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }));
+
+  // Language tabs
+  const tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach((t) =>
+    t.addEventListener("click", () => {
+      tabs.forEach((x) => {
+        const on = x === t;
+        x.setAttribute("aria-selected", String(on));
+        document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+      });
+    }),
+  );
+
+  // Reveal on scroll
+  const els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => io.observe(el));
+    // Safety net: anything already scrolled past is shown, even after a fast jump.
+    const sweep = () => els.forEach((el) => { if (!el.classList.contains("in") && el.getBoundingClientRect().top < innerHeight) { el.classList.add("in"); io.unobserve(el); } });
+    let t; window.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(sweep, 150); }, { passive: true });
+  } else els.forEach((el) => el.classList.add("in"));
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
